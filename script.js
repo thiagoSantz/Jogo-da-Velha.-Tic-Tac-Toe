@@ -126,8 +126,10 @@ const fluxoDoJogo = (function () {
     gerenciarTurnos(posicao) {
       if (!jogoAtivo) return;
 
-      Gameboard.fazerJogada(jogadorAtual.marca, posicao);
       const board = Gameboard.mostrarBoard();
+      if (board[posicao] !== "") return; // posição já ocupada
+
+      Gameboard.fazerJogada(jogadorAtual.marca, posicao);
       displayController.displayNaTela();
 
       //se vhouver vitória, se empatar, se nao houver nenhum nem outro

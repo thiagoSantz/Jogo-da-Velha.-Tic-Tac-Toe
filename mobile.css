@@ -10,7 +10,7 @@
   }
 
   .conteudo {
-    grid-template-rows: 2fr 1fr 5fr 1fr 3fr;
+    grid-template-rows: 1fr 3fr 2fr 1fr;
   }
 
   .header {
@@ -18,6 +18,10 @@
     flex-direction: column;
     height: auto;
     padding: 2vh 0;
+  }
+
+  .enchimento-header , .enchimento-jogo , .enchimento-footer {
+    display: none;
   }
 
   .caixa-botao {
@@ -29,6 +33,11 @@
     width: 10vh;
     height: 10vh;
     font-size: 6vh;
+  }
+
+  .placar {
+    font-size: 2.5vh;
+    width: 60%;
   }
 
   .mensagem-vitoria {
