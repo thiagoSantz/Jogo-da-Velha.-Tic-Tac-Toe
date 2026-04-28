@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster&family=Smooch+Sans:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="mobile.css" />
+    <script src="script.js" defer></script>
+    <title>Tic Tac Toe</title>
+  </head>
+  <body>
+    <div class="modal" id="modal">
+      <div class="modal-conteudo">
+        <div class="modal-interna">
+          <div class="header-modal">
+            <span class="titulo1">Jogo da velha.</span>
+            <span class="titulo2">Tic Tac Toe</span>
+          </div>
+          <input type="text" id="nome1" placeholder="Nome do Jogador 1" />
+          <input type="text" id="nome2" placeholder="Nome do Jogador 2" />
+          <button class="botao iniciar" id="botao-iniciar">Iniciar</button>
+        </div>
+      </div>
+    </div>
+    <div class="conteudo">
+      <div class="header">
+        <div class="header-titulo">
+          <span class="titulo1">Jogo da velha.</span>
+          <span class="titulo2">Tic Tac Toe</span>
+        </div>
+        <div class="enchimento-header"></div>
+        <div class="caixa-botao">
+          <button class="botao reset" id="botao-reset">Reiniciar</button>
+        </div>
+      </div>
+      <div class="enchimento-jogo"></div>
+      <div class="caixa-jogo">
+        <div class="caixa-interna">
+          <div class="slot">o</div>
+          <div class="slot">x</div>
+          <div class="slot">o</div>
+          <div class="slot">x</div>
+          <div class="slot">o</div>
+          <div class="slot">x</div>
+          <div class="slot">o</div>
+          <div class="slot">x</div>
+          <div class="slot">o</div>
+        </div>
+      </div>
+      <div class="enchimento-footer"></div>
+      <div class="footer">
+        <div class="placar">
+          <div class="jogador1" >
+            <span class="texto" id="jogador1">Jogador 1:</span>
+            <span id="pontuacao1"> 0 </span>
+          </div>
+          <div class="jogador2" >
+            <span class="texto" id="jogador2">Jogador 2:</span>
+            <span id="pontuacao2"> 0 </span>
+          </div>
+          <div class="mensagem-vitoria" id="mensagemX">
+            <span class="mensagem" id="mensagem"></span>
+            <span class="contagem" id="contagem"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,270 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  /*-----------------*/
+  background: linear-gradient(45deg, #302940, #2a2a2a, #302940);
+  min-height: 100vh;
+}
+
+.conteudo {
+  display: grid;
+  grid-template-rows: 2fr 1fr 5fr 1fr 3fr;
+  min-height: 100vh;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  /**/
+  font-family: "Roboto", sans-serif;
+  font-size: small;
+}
+ /*-----------------*/
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  /* fundo escuro semitransparente */
+  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-conteudo {
+  display: flex;
+  margin: auto;
+  align-items: center;
+  width: 60vh;
+  height: 60vh;
+  border: 2px solid #555;
+  border-radius: 12px;
+  padding: 2vh;
+  background: linear-gradient(45deg, #4b4260, #3c3c3c, #4b4260);
+}
+
+.modal-interna {
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  align-items: center;
+  justify-items: center;
+  border: 2px solid #555;
+  border-radius: 12px;
+  width: 60vh;
+  height: 60vh;
+  background: linear-gradient(45deg, #262626, #262626, #262626);
+}
+
+.header-modal {
+  text-align: center;
+  align-items: center;
+  /**/
+  font-size: clamp(3vh, 4vw, 5vh);
+  color: whitesmoke;
+  border-bottom: 1px solid #555;
+  white-space: nowrap;
+}
+
+.modal.escondido {
+    display: none;
+}
+
+input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid #555;
+    border-radius: 8px;
+    color: whitesmoke;
+    padding: 0.8rem 1rem;
+    text-align: center;
+    font-size: 3vh;
+    font-family: "Smooch Sans", sans-serif;
+    width: 70%;
+    outline: none;
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/*********************************/
+
+.header {
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr;
+  text-align: center;
+  align-items: center;
+  /**/
+  font-size: clamp(4vh, 5vw, 6vh);
+  color: whitesmoke;
+  border-bottom: 1px solid #555;
+  white-space: nowrap;
+}
+
+.titulo1 {
+  font-family: "Lobster", serif;
+}
+
+.titulo2 {
+  font-family: "Smooch Sans", sans-serif;
+  font-style: italic;
+  color: rgba(161, 161, 161, 0.73);
+}
+
+.caixa-botao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.botao {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /**/
+  background: linear-gradient(90deg, #563b93, #563b93, #454448);
+  border: 1px solid #393939c8;
+  border-radius: 8px;
+  /**/
+  color: whitesmoke;
+  font-size: clamp(2.5vh, 3vw, 4vh);
+  font-family: "Smooch Sans", sans-serif;
+  cursor: pointer;
+  /**/
+  padding: 0.5rem 1.5rem;
+  width: auto;
+  min-width: 25%;
+}
+
+.botao:hover {
+  background: linear-gradient(90deg, #6a4aad, #6a4aad, #5a5860);
+}
+
+.botao:active {
+  background: linear-gradient(90deg, #3d2a6e, #3d2a6e, #2e2d30);
+  transform: scale(0.95);
+}
+
+/*********************************/
+
+.caixa-jogo {
+  margin: auto;
+  align-items: center;
+  border: 2px solid #555;
+  border-radius: 12px;
+  padding: 2vh;
+  background: linear-gradient(45deg, #4b4260, #3c3c3c, #4b4260);
+}
+
+.caixa-interna {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 2px solid #555;
+  border-radius: 12px;
+  background: linear-gradient(45deg, #262626, #262626, #262626);
+}
+
+.slot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 16vh;
+  height: 16vh;
+  /**/
+  border: 1px solid #242424d9;
+  border-radius: 8px;
+  color: rgba(245, 245, 245, 0.71);
+  background: linear-gradient(45deg, #302b3e, #3e3e3e);
+  font-size: 10vh;
+  /**/
+  cursor: pointer;
+}
+
+.slot:hover {
+  background: linear-gradient(45deg, #4a4a4a, #606060);
+  transition: background 0.2s;
+}
+
+.slot:active {
+  background: linear-gradient(45deg, #666, #888);
+  transform: scale(0.95);
+}
+
+/*********************************/
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /**/
+  font-family: "Smooch Sans", sans-serif;
+  color: whitesmoke;
+  border-top: 1px solid #555;
+}
+
+.placar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 50%;
+  height: 50%;
+  position: relative;
+  overflow: hidden;
+  /**/
+  background: linear-gradient(90deg, #302940, #454448);
+  border: 1px solid #363636;
+  border-radius: 8px;
+  color: whitesmoke;
+  padding: 0.5rem 1.5rem;
+  font-size: 4vh;
+  font-family: "Smooch Sans", sans-serif;
+}
+
+.jogador1,
+.jogador2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.mensagem-vitoria {
+  position: absolute;
+  bottom: -120%;
+  width: 100%;
+  height: 100%;
+  transition: bottom 0.5s ease-in-out;
+  /**/
+  display: flex;
+  align-items: center;
+  /**/
+  background: linear-gradient(90deg, #9b902c, #454448);
+  border: 1px solid #363636;
+  border-radius: 8px;
+  color: whitesmoke;
+  padding: 0.5rem 1.5rem;
+  font-size: 4vh;
+  font-family: "Smooch Sans", sans-serif;
+}
+
+.mensagem-vitoria.ativa {
+  bottom: 0;
+}
+
+.mensagem {
+  flex: 1;
+  text-align: center;
+  padding-left: 6vw;
+}
+
+.contagem {
+  margin-left: auto;
+  margin-right: 6vw;
+  color: #929292a7;
+}

@@ -1,0 +1,58 @@
+@media (max-width: 480px) {
+  .modal-conteudo {
+    width: 70vw;
+    height: 90vw;
+  }
+
+  .modal-interna {
+    width: 70vw;
+    height: 90vw;
+  }
+
+  .conteudo {
+    grid-template-rows: 2fr 1fr 5fr 1fr 3fr;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    padding: 2vh 0;
+  }
+
+  .caixa-botao {
+    justify-content: center;
+    margin-top: 2vh;
+  }
+
+  .slot {
+    width: 10vh;
+    height: 10vh;
+    font-size: 6vh;
+  }
+
+  .mensagem-vitoria {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mensagem {
+    text-align: center !important;
+    margin-left: 0 !important;
+    flex: none !important;
+    width: 100% !important;
+    padding-left: 0 !important;
+  }
+
+  .mensagem-vitoria {
+    padding: 0.5rem;
+  }
+
+  .contagem {
+    width: 100%;
+    text-align: center;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
