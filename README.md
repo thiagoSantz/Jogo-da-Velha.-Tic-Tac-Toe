@@ -12,6 +12,8 @@
 
 Um Jogo da Velha completo, jogável no navegador, com interface elegante, responsiva e animada. O projeto foi construído com ênfase em boas práticas de organização de código, mantendo o mínimo de variáveis no escopo global.
 
+![Screenshot do jogo](screenshot.png)
+
 ---
 
 ## ✨ Funcionalidades
