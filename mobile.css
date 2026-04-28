@@ -10,7 +10,7 @@
   }
 
   .conteudo {
-    grid-template-rows: 1fr 3fr 2fr 1fr;
+    grid-template-rows: 1fr 3fr 1fr 1fr;
   }
 
   .header {
@@ -36,8 +36,9 @@
   }
 
   .placar {
-    font-size: 2.5vh;
-    width: 60%;
+    font-size: 3vh;
+    width: 70%;
+    height: 70%;
   }
 
   .mensagem-vitoria {
