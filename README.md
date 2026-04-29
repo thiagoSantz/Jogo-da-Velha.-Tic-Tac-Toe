@@ -19,7 +19,8 @@ Um Jogo da Velha completo, jogável no navegador, com interface elegante, respon
 ## ✨ Funcionalidades
 
 - 🎯 **Lógica completa** — verificação de vitória em todas as combinações e detecção de empate
-- 👥 **Dois jogadores** — cada um com nome personalizado inserido antes do jogo começar
+- 👥 **Dois modos de jogo** — dois jogadores ou contra o computador
+- 🤖 **Bot inteligente** — o computador tenta vencer, bloqueia jogadas do adversário e joga aleatoriamente quando necessário
 - 🏆 **Placar persistente** — pontuação acumulada entre rodadas sem precisar reiniciar o jogo
 - ⏱️ **Contagem regressiva** — após vitória ou empate, uma contagem de 3 segundos reinicia a rodada automaticamente
 - 🎨 **Animação de resultado** — mensagem de vitória/empate sobe do placar com transição suave
@@ -48,6 +49,16 @@ Módulos que se executam imediatamente, com variáveis privadas e métodos expos
 - **Gameboard** — gerencia o estado do tabuleiro
 - **displayController** — controla toda a interação com o DOM
 - **fluxoDoJogo** — controla a lógica e o fluxo da partida
+
+---
+
+## 🤖 Lógica do Bot
+
+O computador segue três prioridades na ordem:
+
+1. **Vencer** — se tiver 2 marcas em linha com uma posição vazia, joga lá
+2. **Bloquear** — se o jogador tiver 2 marcas em linha com uma posição vazia, bloqueia
+3. **Aleatório** — se não houver jogada crítica, escolhe uma posição vazia aleatória
 
 ---
 
@@ -80,11 +91,11 @@ Módulos que se executam imediatamente, com variáveis privadas e métodos expos
 ## 🚀 Como Jogar
 
 1. Abra o `index.html` no navegador
-2. Insira os nomes dos jogadores no modal inicial
-3. Clique em **Iniciar**
+2. Insira seu nome no modal inicial
+3. Escolha **Iniciar** para jogar contra outro jogador ou **Contra o Bot** para jogar contra o computador
 4. Clique nos slots para fazer sua jogada
 5. O jogo detecta vitória ou empate automaticamente
-6. Após 3 segundos, uma nova rodada começa
+6. Após 3 segundos, uma nova rodada começa automaticamente
 7. Use o botão **Reiniciar** para zerar o placar e começar do zero
 
 ---

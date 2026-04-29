@@ -54,7 +54,7 @@ body {
 
 .modal-interna {
   display: grid;
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
   align-items: center;
   justify-items: center;
   border: 2px solid #555;

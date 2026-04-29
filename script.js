@@ -31,6 +31,8 @@ const Gameboard = (function () {
 
 //IIFE Controlador da tela
 const displayController = (function () {
+  let contagemIntervalo;
+  /** */
   const slots = document.querySelectorAll(".slot");
   return {
     displayNaTela() {
@@ -50,12 +52,11 @@ const displayController = (function () {
       const botaoReset = document.getElementById("botao-reset");
       if (botaoReset) {
         botaoReset.addEventListener("click", function () {
-          fluxoDoJogo.reiniciarJogo();
+          fluxoDoJogo.reiniciarJogo(); // limpa primeiro
           document.getElementById("mensagemX").classList.remove("ativa");
-          displayController.displayNaTela();
-          /**/
           document.getElementById("pontuacao1").textContent = 0;
           document.getElementById("pontuacao2").textContent = 0;
+          displayController.displayNaTela(); // atualiza tela por último
         });
       }
     },
@@ -63,10 +64,24 @@ const displayController = (function () {
       const modal = document.getElementById("modal");
 
       const botaoIniciar = document.getElementById("botao-iniciar");
+      const botaoContraBot = document.getElementById("botao-Contra-bot");
+
       if (botaoIniciar) {
         botaoIniciar.addEventListener("click", function () {
           const nome1 = document.getElementById("nome1").value || "Jogador 1";
           const nome2 = document.getElementById("nome2").value || "Jogador 2";
+          /**/
+          document.getElementById("jogador1").textContent = nome1 + ":";
+          document.getElementById("jogador2").textContent = nome2 + ":";
+          /**/
+          fluxoDoJogo.iniciarJogadores(nome1, nome2);
+          modal.classList.add("escondido");
+        });
+      }
+      if (botaoContraBot) {
+        botaoContraBot.addEventListener("click", function () {
+          const nome1 = document.getElementById("nome1").value || "Jogador 1";
+          const nome2 = "Computador";
           /**/
           document.getElementById("jogador1").textContent = nome1 + ":";
           document.getElementById("jogador2").textContent = nome2 + ":";
@@ -84,16 +99,19 @@ const displayController = (function () {
     contagemNaTela() {
       let tempo = 3;
       document.getElementById("contagem").textContent = tempo + "s";
-      const intervalo = setInterval(function () {
+      contagemIntervalo = setInterval(function () {
         tempo--;
         document.getElementById("contagem").textContent = tempo + "s";
         if (tempo <= 0) {
-          clearInterval(intervalo);
+          clearInterval(contagemIntervalo);
           document.querySelector(".mensagem-vitoria").classList.remove("ativa");
           fluxoDoJogo.reiniciarRodada();
           displayController.displayNaTela();
         }
       }, 1000);
+    },
+    pararContagem() {
+      clearInterval(contagemIntervalo);
     },
   };
 })();
@@ -104,6 +122,7 @@ const fluxoDoJogo = (function () {
   let jogador2;
   let jogadorAtual;
   let jogoAtivo = false;
+  let botTimeout;
 
   const boardCheck = [
     [0, 1, 2],
@@ -127,42 +146,63 @@ const fluxoDoJogo = (function () {
       if (!jogoAtivo) return;
 
       const board = Gameboard.mostrarBoard();
-      if (board[posicao] !== "") return; // posição já ocupada
+      if (board[posicao] !== "") return;
 
       Gameboard.fazerJogada(jogadorAtual.marca, posicao);
+      const boardAtualizado = Gameboard.mostrarBoard();
       displayController.displayNaTela();
 
-      //se vhouver vitória, se empatar, se nao houver nenhum nem outro
-      if (this.vitoriaNoTabuleiro(board)) {
-        /**/
+      if (this.vitoriaNoTabuleiro(boardAtualizado)) {
         document.getElementById("mensagem").textContent =
           jogadorAtual.name + " Venceu!";
         displayController.adicionarPonto(jogadorAtual);
         console.log(`Jogador ${jogadorAtual.name} venceu`);
-        /**/
         jogoAtivo = false;
         document.getElementById("mensagemX").style.background =
           "linear-gradient(90deg, #2c9b5a, #454448)";
         document.getElementById("mensagemX").classList.add("ativa");
-        /**/
         displayController.contagemNaTela();
-        /**/
-      } else if (this.empateNoTabuleiro(board)) {
-        /**/
+      } else if (this.empateNoTabuleiro(boardAtualizado)) {
         document.getElementById("mensagem").textContent = "Empate";
         console.log("Empate");
-        /**/
         jogoAtivo = false;
         document.getElementById("mensagemX").style.background =
           "linear-gradient(90deg, #d5b61d, #454448)";
         document.getElementById("mensagemX").classList.add("ativa");
-        /**/
         displayController.contagemNaTela();
-        /**/
       } else {
-        //troca de jogador
         jogadorAtual = jogadorAtual == jogador1 ? jogador2 : jogador1;
+        if (jogadorAtual.name == "Computador") {
+          botTimeout = setTimeout(() => {
+            const boardAtual = Gameboard.mostrarBoard();
+            this.gerenciarTurnos(this.jogadaBot(boardAtual));
+          }, 400);
+        }
       }
+    },
+    jogadaBot(board) {
+      // 1. Verifica se pode vencer
+      for (let combinacao of boardCheck) {
+        const marcasBot = combinacao.filter((i) => board[i] == "o").length;
+        const posicaoVazia = combinacao.find((i) => board[i] == "");
+        if (marcasBot == 2 && posicaoVazia !== undefined) {
+          return posicaoVazia;
+        }
+      }
+      // 2. Verifica se precisa bloquear
+      for (let combinacao of boardCheck) {
+        const marcasJogador = combinacao.filter((i) => board[i] == "x").length;
+        const posicaoVazia = combinacao.find((i) => board[i] == "");
+        if (marcasJogador == 2 && posicaoVazia !== undefined) {
+          return posicaoVazia;
+        }
+      }
+      // 3. Joga aleatório
+      let posicao = Math.floor(Math.random() * 9);
+      while (board[posicao] !== "") {
+        posicao = Math.floor(Math.random() * 9);
+      }
+      return posicao;
     },
     vitoriaNoTabuleiro(board) {
       //Se o tabuleiro bater com alguma combinação de vitoria
@@ -184,11 +224,15 @@ const fluxoDoJogo = (function () {
       return empate;
     },
     reiniciarRodada() {
+      clearTimeout(botTimeout);
+      displayController.pararContagem()
       Gameboard.limparBoard();
       jogadorAtual = jogador1;
       jogoAtivo = true;
     },
     reiniciarJogo() {
+      clearTimeout(botTimeout);
+      displayController.pararContagem()
       Gameboard.limparBoard();
       jogadorAtual = jogador1;
       jogador1.pontuacao = 0;
